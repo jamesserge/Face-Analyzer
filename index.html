@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Camera Access</title>
+  <title>Face Analyzer</title>
   <style>
     body {
+      background-color: #111;
+      color: #fff;
       text-align: center;
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #000;
-      color: #fff;
     }
+
     video {
       width: 100%;
-      height: auto;
       max-width: 480px;
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+
+    #message {
+      font-size: 1.8em;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>Camera Preview</h1>
-  <video id="video" autoplay playsinline></video>
+  <h1>Face Analyzer</h1>
+  <video id="video" autoplay playsinline muted></video>
+  <div id="message">Please allow camera access...</div>
 
   <script>
     const video = document.getElementById("video");
+    const message = document.getElementById("message");
 
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
       .then((stream) => {
         video.srcObject = stream;
+        message.textContent = "Analyzing face...";
+        setTimeout(() => {
+          message.textContent = "Result: Ugly! (Just kidding!) 😆";
+        }, 3000);
       })
       .catch((err) => {
-        console.error("Camera access denied:", err);
-        alert("Camera access failed. Please check browser permissions.");
+        console.error("Camera error:", err);
+        message.textContent = "Camera access denied. Cannot analyze your beauty. 😢";
       });
   </script>
 </body>
