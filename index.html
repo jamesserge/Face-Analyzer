@@ -2,17 +2,35 @@
 <html>
 <head>
   <title>Camera Access</title>
+  <style>
+    body {
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+    }
+    video {
+      width: 100%;
+      height: auto;
+      max-width: 480px;
+    }
+  </style>
 </head>
 <body>
   <h1>Camera Preview</h1>
-  <video id="video" width="300" autoplay></video>
+  <video id="video" autoplay playsinline></video>
+
   <script>
+    const video = document.getElementById("video");
+
     navigator.mediaDevices.getUserMedia({ video: true })
-      .then(stream => {
-        document.getElementById('video').srcObject = stream;
+      .then((stream) => {
+        video.srcObject = stream;
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Camera access denied:", err);
+        alert("Camera access failed. Please check browser permissions.");
       });
   </script>
 </body>
