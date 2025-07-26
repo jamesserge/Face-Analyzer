@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-
-<html lang="en">
-
-	<head>
-
-		<meta charset="UTF-8">
-
-		<title>james simple website</title>
-
-
-	</head>
-
-	<body>
-		<h1>james simple website</h1>
-		
-		<p>This is a paragraph.</p>
-		
-		<img alt="Smiley face"
-		     src="https://assets.codepen.io/6093409/smiley-face.png">
-
-	</body>
-
+<html>
+<head>
+  <title>Camera Access</title>
+</head>
+<body>
+  <h1>Camera Preview</h1>
+  <video id="video" width="300" autoplay></video>
+  <script>
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        document.getElementById('video').srcObject = stream;
+      })
+      .catch(err => {
+        console.error("Camera access denied:", err);
+      });
+  </script>
+</body>
 </html>
