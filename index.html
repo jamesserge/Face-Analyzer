@@ -33,7 +33,7 @@
   </style>
 </head>
 <body>
-  <h1>Face Analyzer</h1>
+  <h1>Face Analyzer by Ryoma</h1>
   <video id="video" autoplay playsinline muted></video>
   <div id="message">Please allow camera access...</div>
 
@@ -47,7 +47,7 @@
         message.textContent = "Analyzing face...";
         setTimeout(() => {
           message.textContent = "Result:  Ugly!  (Just kidding) 😆";
-        }, 3000);
+        }, 3500);
       })
       .catch((err) => {
         console.error("Camera error:", err);
